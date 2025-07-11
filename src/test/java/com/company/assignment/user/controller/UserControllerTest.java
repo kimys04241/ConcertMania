@@ -40,8 +40,7 @@ class UserControllerTest {
                 {
                     "userId": "test",
                     "password": "password",
-                    "name": "동탁",
-                    "regNo": "921108-1582816"
+                    "name": "동탁"
                 }
                 """;
         doNothing().when(userService).signup(any());
@@ -64,8 +63,7 @@ class UserControllerTest {
                 {
                     "userId" : "",
                     "password" : "",
-                    "name" : "동탁",
-                    "regNo" : "921108-1582816"
+                    "name" : "동탁"
                 }
                 """;
 

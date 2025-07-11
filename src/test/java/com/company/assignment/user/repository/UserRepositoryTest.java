@@ -31,8 +31,8 @@ public class UserRepositoryTest {
         userRepository.save(user);
 
         // when
-        boolean exists = userRepository.existsBySsnHash(ssnHash);
-        boolean notExists = userRepository.existsBySsnHash("12388328");
+        boolean exists = userRepository.existsByUserId(ssnHash);
+        boolean notExists = userRepository.existsByUserId("12388328");
 
         // then
         assertThat(exists).isTrue();

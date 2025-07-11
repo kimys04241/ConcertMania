@@ -25,18 +25,11 @@ public class SignupRequest {
     @NotBlank
     private String name;
 
-    @Schema(description = "사용자 주민번호", example = "921108-1582816")
-    @NotBlank
-    private String regNo;
-
-
     public User toEntity() {
         return User.builder()
                 .userId(this.userId)
                 .password(this.password)
                 .name(this.name)
-                .ssn(this.regNo)
-                .ssnHash(CryptoUtil.sha256(regNo))
                 .build();
     }
 }

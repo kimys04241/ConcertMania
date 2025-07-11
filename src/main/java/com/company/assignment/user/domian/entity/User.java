@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "assignment_user")
 @Getter
@@ -21,7 +24,15 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true, length = 100)
+    @Convert(converter = AES256Converter.class)
     private String userId;
+
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     @Column(nullable = false, length = 60)
     @Convert(converter = PasswordConverter.class)
@@ -30,11 +41,4 @@ public class User {
     @Column(nullable = false, length = 24)
     @Convert(converter = AES256Converter.class)
     private String name;
-
-    @Column(nullable = false, unique = true, length = 24)
-    @Convert(converter = AES256Converter.class)
-    private String ssn;
-
-    @Column(nullable = false, unique = true, length = 64)
-    private String ssnHash;
 }

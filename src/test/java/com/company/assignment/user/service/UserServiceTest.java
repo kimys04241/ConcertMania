@@ -44,32 +44,16 @@ class UserServiceTest {
                 .userId("testUserId")
                 .password("testPassword")
                 .name("동탁")
-                .regNo("921108-1582816")
                 .build();
     }
 
-
-    @Test
-    @DisplayName("이미 가입된 사용자는 가입 불가")
-    void testAlreadyExistUser() {
-        // given
-        String ssnHash = CryptoUtil.sha256("921108-1582816");
-        when(userRepository.existsBySsnHash(ssnHash)).thenReturn(true);
-
-        // when
-        AlreadyExistUserException exception = assertThrows(AlreadyExistUserException.class,
-                () -> userService.signup(signupRequest));
-
-        // then
-        assertEquals(ApiStatus.ALREADY_EXIST_USER_EXCEPTION_CODE, exception.getCode());
-    }
 
     @Test
     @DisplayName("정상 가입")
     void testSignup() {
         // given
         String ssnHash = CryptoUtil.sha256("921108-1582816"); // 동탁
-        when(userRepository.existsBySsnHash(ssnHash)).thenReturn(false);
+        when(userRepository.existsByUserId(ssnHash)).thenReturn(false);
         when(userRepository.save(any())).thenReturn(new User());
 
         // when
