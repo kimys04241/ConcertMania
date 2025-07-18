@@ -1,5 +1,6 @@
 package com.company.assignment.concert.domain.entity;
 
+import com.company.assignment.common.domian.entity.BaseEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Concert {
+public class Concert extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -17,7 +18,7 @@ public class Concert {
     private List<Seat> seats = new ArrayList<>();
 
     @Column(nullable = false, length = 100)
-    private String name;
+    private String title;
 
     @Column(nullable = false, length = 100)
     private LocalDateTime location;
@@ -34,7 +35,4 @@ public class Concert {
 
     @Column(nullable = false)
     private LocalDateTime concertAt;
-
-    @Column(nullable = false)
-    private LocalDateTime registryAt;
 }

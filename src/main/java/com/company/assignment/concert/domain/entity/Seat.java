@@ -1,12 +1,10 @@
 package com.company.assignment.concert.domain.entity;
 
-import com.company.assignment.user.domian.entity.User;
+import com.company.assignment.common.domian.entity.BaseEntity;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
-public class Seat {
+public class Seat extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -17,16 +15,23 @@ public class Seat {
     private Concert concert;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "section_id")
+    private Section section;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seat_grade_id")
     private SeatGrade grade;
 
-    private int row;
-    private int col;
+    @Column(nullable = false)
+    private int rowNumber;
+    @Column(nullable = false)
+    private int colNumber;
+    @Column(nullable = false)
     private String seatNumber;
 
     @Column(nullable = false)
     private boolean reserved = false;
 
-    @Column(nullable = false)
-    private LocalDateTime registryAt;
+    @Version
+    private int version;
 }

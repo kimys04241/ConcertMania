@@ -1,15 +1,13 @@
 package com.company.assignment.concert.domain.entity;
 
+import com.company.assignment.common.domian.entity.BaseEntity;
 import com.company.assignment.user.domian.entity.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-public class Reservation {
+public class Reservation extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -21,8 +19,11 @@ public class Reservation {
     @ManyToOne
     private Seat seat;
 
+    @Column(nullable = false)
     private LocalDateTime reservedAt;
+    @Column(nullable = false)
     private LocalDateTime canceledAt;
 
+    @Column(nullable = false)
     private boolean active;
 }
